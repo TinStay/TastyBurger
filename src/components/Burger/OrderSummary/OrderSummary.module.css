@@ -1,0 +1,60 @@
+.OrderSummary{
+    text-align: center;
+    padding: 15px;
+    border-radius: 25px;
+    background-color: rgb(211, 240, 144);
+}
+
+.List{
+    position: relative;
+    left: 35%;
+    text-align: start;
+    margin: 15px auto;
+    list-style-type: square;
+    font-size: 20px;
+}
+
+.Continue{
+    margin: 10px 15px;
+    background-color: rgb(212, 153, 24);
+    border: 1px solid rgba(170, 117, 1, 0);
+    box-shadow: none;
+}
+
+.Continue:hover{
+    background-color: rgb(204, 139, 0);
+    border: 1px solid rgb(175, 120, 0);
+}
+
+.Continue:focus{
+    background-color: rgb(204, 139, 0);
+    border: 1px solid rgb(175, 120, 0);
+    box-shadow: none;
+}
+/* .Continue:active{
+    background-color: rgb(204, 139, 0);
+    border: 1px solid rgb(175, 120, 0);
+    box-shadow: none;
+} */
+
+.Return{
+    margin: 10px 15px;
+    background-color: #d35400;
+    border: 1px solid rgba(170, 117, 1, 0);
+    border-radius: 20px;
+    box-shadow: none;
+}
+
+.Return:hover{
+
+    background-color: #bb5d1f;
+    border: 1px solid #b45312;
+}
+
+.Return:active{
+    margin: 10px 15px;
+    background-color: #ca5b11;
+    border: 1px solid #b45312;
+    box-shadow: none;
+}
+
