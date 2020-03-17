@@ -9,7 +9,7 @@ It has been built for both desktop and mobile view.
 
 The website has not been deployed to the internet yet and it is still in development stage.
 
-###Built With
+### Built With
 
 * React- JavaScript library for building the user interfaces using components
 * Bootstrap - the main designing framework used along CSS (modules for React)
