@@ -1,5 +1,6 @@
-### Description
+### TastyBurger
 
+### Description
 Burger builder website where users can put different ingredients in their burger and then order it.
 A user can choose to make his own burger or to select one from the displayed burgers. The price of a burger depends on the ingredients added and removed.
 It has been built for both desktop and mobile view. 
