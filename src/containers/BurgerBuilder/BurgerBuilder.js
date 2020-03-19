@@ -126,6 +126,7 @@ class BurgerBuilder extends Component{
         for(let i in this.state.ingredients){
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
+        queryParams.push('price='+ this.state.totalPrice)
         const queryString = queryParams.join('&');
 
         this.props.history.push({
@@ -134,32 +135,7 @@ class BurgerBuilder extends Component{
         });
 
 
-        // Switch the info of modal to a spinner
-        // this.setState({loading: true});
-
-        // const order = {
-        //     ingredients: this.state.ingredients,
-        //     price: this.state.totalPrice,
-        //     customer: {
-        //         name: "Tin Stay",
-        //         address: {
-        //             steet:'50a Street',
-        //             zipCode: '1515',
-        //             country: 'BG'},
-        //         email: 'testing@gmail.com',
-        //         deliveryTime: '5 days'
-        //         }
-        // }
-
-        // axios.post('/orders.json', order)
-        // .then(response => this.setState(
-        //         {loading: false,
-        //         ordering: false}
-        //     ))
-        // .catch(error => this.setState(
-        //         {loading: false,
-        //         ordering: false}
-        //     ));
+        
     }
 
     orderCancel = () => {
@@ -178,13 +154,14 @@ class BurgerBuilder extends Component{
 
         let burger = this.state.errorState ? <p>Ingredients can't be loaded.</p> :<Spinner />;
         let orderSummary = null;
+        {/* <ReadyBurger 
+        load={this.loadReadyBurgerHandler}/> */}
 
         if(this.state.ingredients != null){
             burger= (
                 <Auxilliary>
                     <Burger ingredients={this.state.ingredients}/>
-                    <ReadyBurger 
-                    load={this.loadReadyBurgerHandler}/>
+                    
                     <BuildControls
                     addIngredient={this.addIngredientHandler}
                     removeIngredient={this.removeIngredientHandler}

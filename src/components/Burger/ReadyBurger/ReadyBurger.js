@@ -1,13 +1,14 @@
 import React from 'react';
 import {Card, Button} from 'react-bootstrap';
 import classes from './ReadyBurger.module.css';
+import Cheeseburger from '../../../assets/images/cheeseburger.png';
 
 const readyBurger = (props) =>{
     return(
         <div className={classes.ReadyBurger}>
             <Card 
             className={classes.BurgerCard}>
-                {/* <Card.Img variant="top" src="holder.js/100px180" /> */}
+                <Card.Img variant="top" src={Cheeseburger} />
                 <Card.Body>
                     <Card.Title>Cheeseburger</Card.Title>
                     <Card.Text>
