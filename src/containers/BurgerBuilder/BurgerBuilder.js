@@ -19,21 +19,17 @@ import * as actions from '../../store/actions/index';
 
 class BurgerBuilder extends Component{
     state= {
-        
-        
         purchasable: false,
         ordering: false,
-        loading: false,
-        errorState: null
+        
     }
 
-    // componentDidMount(){
-    //     axios.get('https://react-burger-builder-aa790.firebaseio.com/ingredients.json')
-    //     .then(response => {
-    //         this.setState({ ingredients: response.data})
-    //     })
-    //     .catch(error => this.setState({errorState: true}));
-    // }
+    
+    componentDidMount(){
+        console.log('componentdid mount')
+        this.props.onInitIngredients();
+    }
+
 
     // Checks to see if the customer has put any ingredients
     updatePurchaseState(ingredients){
@@ -49,17 +45,17 @@ class BurgerBuilder extends Component{
 
     }
 
-    loadReadyBurgerHandler = () =>{
-        axios.get('https://react-burger-builder-aa790.firebaseio.com/cheeseburger.json')
-        .then(response => {
-            console.log(response)
-            this.setState({ 
-                ingredients: response.data.ingredients,
-                totalPrice : response.data.price,
-                purchasable: true
-            })
-        }).catch(error => console.log(error));
-    }
+    // loadReadyBurgerHandler = () =>{
+    //     axios.get('https://react-burger-builder-aa790.firebaseio.com/cheeseburger.json')
+    //     .then(response => {
+    //         console.log(response)
+    //         this.setState({ 
+    //             ingredients: response.data.ingredients,
+    //             totalPrice : response.data.price,
+    //             purchasable: true
+    //         })
+    //     }).catch(error => console.log(error));
+    // }
 
     
     orderHandler = () => {
@@ -86,7 +82,7 @@ class BurgerBuilder extends Component{
             disabledInfo[key] = disabledInfo[key] <= 0 
         }
 
-        let burger = this.state.errorState ? <p>Ingredients can't be loaded.</p> :<Spinner />;
+        let burger = this.props.error ? <p>Ingredients can't be loaded.</p> :<Spinner />;
         let orderSummary = null;
         {/* <ReadyBurger 
         load={this.loadReadyBurgerHandler}/> */}
@@ -131,16 +127,19 @@ class BurgerBuilder extends Component{
 
 
 const mapStateToProps = state =>{
+    console.log(state.ingredients)
     return {
-        ings: state.ingredients,
-        price: state.totalPrice
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        error: state.burgerBuilder.error
     };
 };
 
 const mapDispatchToProps = (dispatch) =>{
     return{
         onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
-        onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName))
+        onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
+        onInitIngredients: () => dispatch(actions.initIngredients()),
     };
 };
 
