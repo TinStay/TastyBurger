@@ -9,7 +9,7 @@ const checkoutSummary= (props) => {
         <div className={classes.CheckoutSummary}>
             <h1>This is your burger.</h1>
             <h3> Would you like to continue the order.</h3>
-            <h2>Price: {props.price}</h2>
+            <h2 className="mt-4">Price: {props.price}$</h2>
                 <Button className='mr-3 mt-4 btn-lg' onClick={props.CheckoutCancel}variant='danger'>Cancel</Button>
                 <Button className='mr-3 mt-4 btn-lg' onClick={props.CheckoutContinue}variant='primary'>Continue</Button>
             <div style={{width: '100%',  margin:'auto'}}>
