@@ -1,6 +1,7 @@
 import React, {PureComponent} from "react";
 import Input from '../../components/UI/Input/Input';
 import {Button } from 'react-bootstrap';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 // Redux store
 import * as actions from '../../store/actions/index';
@@ -36,7 +37,8 @@ class Auth extends PureComponent{
                 valid: false,
                 toched: false
             }
-        }
+        },
+        isSignup: true
     }
 
     checkValidity(value, rules){
@@ -77,7 +79,13 @@ class Auth extends PureComponent{
         const emailValue = this.state.controls.email.value
         const passwordValue = this.state.controls.password.value
 
-        this.props.onAuth(emailValue, passwordValue);
+        this.props.onAuth(emailValue, passwordValue, this.state.isSignup);
+    }
+
+    switchAuthModeHandler = () =>{
+        this.setState(prevState =>{
+            return {isSignup: !prevState.isSignup};
+        })
     }
 
 
@@ -90,7 +98,8 @@ class Auth extends PureComponent{
                 config: this.state.controls[key]
                 })
         }
-        const form = formElementsArray.map(formElement =>(
+
+        let form = formElementsArray.map(formElement =>(
             <Input 
             key={formElement.id}
             shouldValidate = {formElement.config.validation}
@@ -100,24 +109,47 @@ class Auth extends PureComponent{
             change={(e) => this.inputChangeHandler(e, formElement.id)} />
            
         ) )
+
+        if(this.props.loading){
+            form = <Spinner />
+        }
+
+        let errorMessage = null;
+
+        if(this.props.error){
+            errorMessage = <p className="btn-danger">{this.props.error.message}</p>
+        }
+
+
         return(
-            <div className="container">
+            <div className="container border">
                 
-                <form className="border p-4" onSubmit={this.submitHandler} action="">
-                <h1>Login</h1>
+                <form className=" p-4" onSubmit={this.submitHandler} action="">
+                <h1>{this.state.isSignup ? "Sign up" : "Sign in"}</h1>
+                {errorMessage}
                 {form}
-                <Button type="submit" variant="success">Submit</Button>
+                <Button type="submit" variant="success">SUBMIT</Button>
                 </form>
+                <button className="btn btn-outline-primary ml-4 m-3" onClick={this.switchAuthModeHandler}> SWITCH TO {this.state.isSignup ? "SIGN IN" : "SIGN UP"}</button>
+
+                
             </div>
         )
+    }
+}
+
+const mapStateToProps = state =>{
+    return{
+        loading: state.auth.loading,
+        error: state.auth.error
     }
 }
 
 
 const mapDispatchToProps = (dispatch) =>{
     return{
-        onAuth: (email,password) => dispatch(actions.auth(email,password))
+        onAuth: (email, password, isSignup) => dispatch(actions.auth(email,password, isSignup))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
