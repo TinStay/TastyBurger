@@ -7,11 +7,11 @@ import Auxilliary from '../../../hoc/Auxilliary/Auxilliary';
 
 const sideDrawer = ( props ) => {
     let attachedClasses =[classes.SideDrawer, classes.Close]
-    let mobileOnly = null;
+    
 
     if(props.open){
         attachedClasses=[classes.SideDrawer, classes.Open];
-        mobileOnly = classes.MobileOnly
+        
     }
     
     return(

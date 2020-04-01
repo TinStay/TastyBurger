@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Burger from '../../Burger/Burger'
 import {Button} from 'react-bootstrap';
 import classes from './CheckoutSummary.module.css'

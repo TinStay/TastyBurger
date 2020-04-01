@@ -11,7 +11,6 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 // REDUX
 import { connect } from 'react-redux';
-import * as actionTypes from '../../store/actions/actionTypes';
 import * as actions from '../../store/actions/index';
 
 
@@ -26,7 +25,7 @@ class BurgerBuilder extends Component{
 
     
     componentDidMount(){
-        console.log('componentdid mount')
+        // console.log('componentdid mount')
         this.props.onInitIngredients();
     }
 
@@ -63,7 +62,7 @@ class BurgerBuilder extends Component{
     };
 
     continueToCheckoutHandler = () =>{
-
+        this.props.onInitPurchase()
         this.props.history.push('/checkout');
   
     }
@@ -84,8 +83,7 @@ class BurgerBuilder extends Component{
 
         let burger = this.props.error ? <p>Ingredients can't be loaded.</p> :<Spinner />;
         let orderSummary = null;
-        {/* <ReadyBurger 
-        load={this.loadReadyBurgerHandler}/> */}
+        
 
         if(this.props.ings != null){
             burger= (
@@ -127,7 +125,7 @@ class BurgerBuilder extends Component{
 
 
 const mapStateToProps = state =>{
-    console.log(state.ingredients)
+    // console.log(state.ingredients)
     return {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
@@ -140,6 +138,7 @@ const mapDispatchToProps = (dispatch) =>{
         onIngredientAdded: (ingName) => dispatch(actions.addIngredient(ingName)),
         onIngredientRemoved: (ingName) => dispatch(actions.removeIngredient(ingName)),
         onInitIngredients: () => dispatch(actions.initIngredients()),
+        onInitPurchase: ( ) => dispatch(actions.purchaseInit())
     };
 };
 
