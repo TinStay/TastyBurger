@@ -20,7 +20,7 @@ class Orders extends Component{
             orders = this.props.orders.map(order =>(
                 <Order 
                 ingredients={order.ingredients}
-                price={order.price}
+                price={order.price.toFixed(2)}
                 key={order.id}/>
                 ))
                 

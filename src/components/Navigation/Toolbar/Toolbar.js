@@ -10,7 +10,7 @@ const toolbar = ( props ) => (
         <HamburgerMenu click={props.openMenu}/>
         <Logo height='80%'></Logo>
         <nav className={classes.DesktopOnly}>
-            <NavigationItems />
+            <NavigationItems  isAuthenticated={props.isAuth}/>
         </nav>
     </header>
 );
