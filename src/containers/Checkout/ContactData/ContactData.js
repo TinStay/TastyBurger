@@ -6,7 +6,7 @@ import axios from '../../../axios-orders';
 import { connect } from 'react-redux';
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
 import * as actions from '../../../store/actions/index';
-
+import {checkValidity} from '../../../shared/utility'
 
 class ContactData extends Component{
     state={
@@ -119,20 +119,7 @@ class ContactData extends Component{
         
     }
 
-    checkValidity(value, rules){
-        let isValid = true;
-
-        if(rules.required){
-            isValid = value.trim() !== "" && isValid;
-        }
-
-        if(rules.minLength){
-            isValid = value.length >= rules.minLength && isValid
-        }
-
-        return isValid
-
-    }
+    
 
     inputChangeHandler = (e, inputIdentifier) => {
         // Clone OrderForm from state
@@ -145,7 +132,7 @@ class ContactData extends Component{
         };
         // Change the value and validity of input
         updatedFormElement.value = e.target.value;
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.valid = checkValidity(updatedFormElement.value, updatedFormElement.validation);
 
         // Set this to true if the user has typed something
         updatedFormElement.touched = true;

@@ -19,7 +19,7 @@ const sideDrawer = ( props ) => {
             <div className={classes.MobileOnly}>
                 <Backdrop show={props.open} click={props.close}/> 
             </div>
-            <div className={attachedClasses.join(" ")}>
+            <div className={attachedClasses.join(" ")} onClick={props.close}>
                 <div className={classes.Logo}>
                     <Logo />
                 </div>
