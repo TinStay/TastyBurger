@@ -118,6 +118,8 @@ class BurgerBuilder extends Component{
         if(this.state.loading){
             orderSummary = <Spinner />
         }
+
+        
         return(
             <Auxilliary>
                 <Modal show={this.state.ordering} 

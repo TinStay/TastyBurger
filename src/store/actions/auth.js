@@ -50,10 +50,10 @@ export const auth = (email, password, isSignup) =>{
             returnSecureToken: true
         }
 
-        let url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=api_key"
+        let url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?api_key"
        
         if(!isSignup){
-            url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=api_key"
+            url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?api_key"
         }
         
         axios.post(url, authData).

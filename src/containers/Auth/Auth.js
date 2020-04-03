@@ -43,8 +43,8 @@ class Auth extends PureComponent{
         isSignup: true
     }
 
-    componentDidMount(){
-        if(!this.props.building && this.props.authRedirectPath !=='/'){
+    componentDidMount() {
+        if (!this.props.building && this.props.authRedirectPath !== '/') {
             this.props.onSetAuthRedirectPath();
         }
     }
@@ -84,6 +84,7 @@ class Auth extends PureComponent{
 
     submitHandler = e => {
         e.preventDefault();
+
         const emailValue = this.state.controls.email.value
         const passwordValue = this.state.controls.password.value
 
@@ -130,7 +131,9 @@ class Auth extends PureComponent{
 
         let authRedirect = null ;
         if(this.props.isAuthenticated){
+            console.log("IS AUTHENTICATED",this.props.isAuthenticated)
             authRedirect = <Redirect to={this.props.authRedirectPath}/>
+            
         }
 
 
@@ -144,30 +147,27 @@ class Auth extends PureComponent{
                 <Button type="submit" variant="success">SUBMIT</Button>
                 </form>
                 <button className="btn btn-outline-primary ml-4 m-3" onClick={this.switchAuthModeHandler}> SWITCH TO {this.state.isSignup ? "SIGN IN" : "SIGN UP"}</button>
-
+                
                 
             </div>
         )
     }
 }
-
-const mapStateToProps = state =>{
-    return{
+const mapStateToProps = state => {
+    return {
         loading: state.auth.loading,
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
         building: state.burgerBuilder.building,
-        authRedirectPath: state.auth. authRedirectPath,
+        authRedirectPath: state.auth.authRedirectPath
+    };
+};
 
-    }
-}
-
-
-const mapDispatchToProps = (dispatch) =>{
-    return{
-        onAuth: (email, password, isSignup) => dispatch(actions.auth(email,password, isSignup)),
+const mapDispatchToProps = dispatch => {
+    return {
+        onAuth: ( email, password, isSignup ) => dispatch( actions.auth( email, password, isSignup ) ),
         onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
-    }
-}
+    };
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+export default connect( mapStateToProps, mapDispatchToProps )( Auth );

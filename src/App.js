@@ -44,10 +44,8 @@ componentDidMount(){
   return (
     <div className="">
       <Layout>
-      <Switch>
         {routes}
         
-      </Switch>
       </Layout>
     </div>
   );

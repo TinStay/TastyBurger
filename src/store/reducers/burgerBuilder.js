@@ -42,7 +42,7 @@ const setIngredients = (state, action) =>{
         ...state,
         ingredients: action.ingredients,
         totalPrice: 3,
-        error: false ,
+        error: false,
         building: false
     };
 }
