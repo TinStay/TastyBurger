@@ -17,7 +17,7 @@ class Orders extends Component{
         let orders = <Spinner />
 
         if(!this.props.loading){
-            if(this.props.orders.length == 0){
+            if(this.props.orders.length === 0){
                 orders = <h2 className="text-center">No orders yet.</h2>
             }else{
                 orders = this.props.orders.map(order =>(

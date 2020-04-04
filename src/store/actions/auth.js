@@ -58,10 +58,10 @@ export const auth = (email, password, isSignup) =>{
         if(!isSignup){
             url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${api_key}`;
         }
-        console.log(url)
         
-        axios.post(url, authData).
-        then(response =>{
+        
+        axios.post(url, authData)
+        .then(response =>{
             // console.log(response)
 
             const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
