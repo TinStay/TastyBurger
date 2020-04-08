@@ -24,61 +24,38 @@ export const authFailure = (error) =>{
 }
 
 export const logout = () =>{
-    localStorage.removeItem("token")
-    localStorage.removeItem("expirationDate")
-    localStorage.removeItem("userId")
-    return {
-        type: actionTypes.AUTH_LOGOUT,
+    // localStorage.removeItem("token")
+    // localStorage.removeItem("expirationDate")
+    // localStorage.removeItem("userId")
 
+    
+
+    return {
+        type: actionTypes.AUTH_INITIATE_LOGOUT,
     }
 }
 
-export const checkAuthTimeout =( expirationTime) =>{
-    return dispatch =>{
-        setTimeout( () =>{
-            dispatch(logout())
-        }, expirationTime * 1000)
+export const logoutSucceed = () =>{
+    return{
+        type: actionTypes.AUTH_LOGOUT,
+    };
+};
+
+export const checkAuthTimeout =( expirationTime ) =>{
+    return {
+        type: actionTypes.AUTH_CHECK_TIMEOUT,
+        expirationTime: expirationTime
     }
+    
 }
 
 export const auth = (email, password, isSignup) =>{
-    return dispatch =>{
-        dispatch(authStart());
-        const authData = {
-            email: email,
-            password: password,
-            returnSecureToken: true
-        }
-
-        const api_key= process.env.REACT_APP_FIREBASE_API_KEY;
-        
-
-        let url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${api_key}`;
-       
-        if(!isSignup){
-            url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${api_key}`;
-        }
-        
-        
-        axios.post(url, authData)
-        .then(response =>{
-            // console.log(response)
-
-            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
-
-            // Storing token and expiration date locally
-            localStorage.setItem("token", response.data.idToken)
-            localStorage.setItem("expirationDate", expirationDate)
-            localStorage.setItem("userId",  response.data.localId)
-
-
-            dispatch(authSuccess(response.data.idToken, response.data.localId))
-            dispatch(checkAuthTimeout(response.data.expiresIn))
-        }
-        ).catch(error => {
-            dispatch(authFailure(error.response.data.error))
-        
-    })}  
+    return{
+        type: actionTypes.AUTH_USER,
+        email: email,
+        password: password,
+        isSignup: isSignup
+    }
 };
 
 export const setAuthRedirectPath = path =>{
