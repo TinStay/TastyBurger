@@ -14,5 +14,5 @@ The website has not been deployed to the internet yet and it is still in develop
 * React- JavaScript library for building the user interfaces using components
 * Bootstrap - the main designing framework used along CSS (modules for React)
 * Firebase - the database used for storing and getting data related to the burgers
-* React Routers - used for the navigation of the website
+* React Router - used for the navigation of the website
 
