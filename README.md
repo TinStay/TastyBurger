@@ -1,4 +1,4 @@
-### TastyBurger
+# TastyBurger
 
 ### Description
 Burger builder website where users can put different ingredients in their burger and then order it.
